@@ -5,7 +5,6 @@ module ActiveDynamic
     included do
       has_many :active_dynamic_attributes,
                class_name: 'ActiveDynamic::Attribute',
-               autosave: true,
                dependent: :destroy,
                as: :customizable
       before_save :save_dynamic_attributes
@@ -14,14 +13,14 @@ module ActiveDynamic
     class_methods do
       def where_dynamic(options)
         query = joins(:active_dynamic_attributes)
-        
+
         options.each do |prop, value|
           query = query.where(active_dynamic_attributes: {
             name: prop,
             value: value
           })
         end
-        
+
         query
       end
     end
