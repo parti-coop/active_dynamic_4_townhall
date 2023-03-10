@@ -128,11 +128,7 @@ module ActiveDynamic
       dynamic_attributes.each do |field|
         next unless _custom_fields[field.name]
         attr = active_dynamic_attributes.find_or_initialize_by(field.as_json)
-        if persisted?
-          attr.update(value: _custom_fields[field.name])
-        else
-          attr.assign_attributes(value: _custom_fields[field.name])
-        end
+        attr.update(value: _custom_fields[field.name])
       end
     end
 
